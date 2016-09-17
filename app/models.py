@@ -9,6 +9,7 @@ class OfficeHour(db.Model):
     longitude = db.Column(db.Float, index=True)
     start = db.Column(db.DateTime, index=True)
     end = db.Column(db.DateTime, index=True)
+    ended = db.Column(db.Boolean, index=True, default=False)
 
     def asdict(self):
         return {
@@ -18,5 +19,6 @@ class OfficeHour(db.Model):
                 'latitude': self.latitude,
                 'longitude': self.longitude,
                 'start': self.start.isoformat(),
-                'end': self.end.isoformat()
+                'end': self.end.isoformat(),
+                'ended': self.ended
         }

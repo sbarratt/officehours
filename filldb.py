@@ -11,7 +11,7 @@ ls = [
     ['Uris Library', 'MAE 3210', 'waves@cornell.edu', 42.447759, -76.485075, datetime.datetime(2016, 9, 17, 14, 30), datetime.datetime(2016, 9, 17, 16, 30)],
     ['Kennedy Hall', 'INFO 4240', 'green@cornell.edu', 42.447989, -76.479131, datetime.datetime(2016, 9, 17, 14, 30), datetime.datetime(2016, 9, 17, 16, 30)],
     ['Mann Library', 'ECE 4320', 'circuits@cornell.edu', 42.448632, -76.476523, datetime.datetime(2016, 9, 17, 14, 30), datetime.datetime(2016, 9, 17, 16, 30)],
-    ['Upson Hall', 'MAE 3240', 'mech@cornell.edu', 42.443834, -76.482037, datetime.datetime(2016, 9, 17, 14, 30), datetime.datetime(2016, 9, 17, 16, 30)],
+    ['Upson Hall', 'MAE 3240', 'mech@cornell.edu', 42.443834, -76.482037, datetime.datetime(2016, 9, 17, 14, 30), datetime.datetime(2016, 9, 17, 16, 30)]
 ]
 
 for l in ls:

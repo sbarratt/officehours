@@ -8,7 +8,7 @@ from .models import OfficeHour
 @app.route("/", methods=["GET"])
 @app.route("/index", methods=["GET"])
 def index():
-    officehours = db.session.query(OfficeHour).all()
+    officehours = db.session.query(OfficeHour).filter(OfficeHour.ended==False).all()
     return render_template("index.html", officehours=officehours)
 
 @app.route("/form", methods=["GET"])
