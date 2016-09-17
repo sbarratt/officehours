@@ -6,7 +6,8 @@ from app import app, db
 from .models import OfficeHour
 
 @app.route("/", methods=["GET"])
-def hello():
+@app.route("/index", methods=["GET"])
+def index():
     officehours = db.session.query(OfficeHour).all()
     return render_template("index.html", officehours=officehours)
 
@@ -16,6 +17,8 @@ def form():
 
 @app.route("/submit", methods=["POST"])
 def submit():
+    print ("Submit")
+    print (request.form)
     class_name = request.form["class"]
     location_name = request.form["location_name"]
     contact = request.form["contact"]
@@ -31,7 +34,7 @@ def submit():
     )
     db.session.add(oh)
     db.session.commit()
-    return 'Success'
+    return redirect(url_for("index"))
 
 @app.route("/markers", methods=["GET"])
 def markers():

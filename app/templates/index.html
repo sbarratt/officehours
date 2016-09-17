@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
     <style>
       html, body {
         height: 100%;
@@ -21,13 +22,14 @@
 <body>
     <div>
         {% for oh in officehours %}
-            <li>{{oh.class_name}} {{oh.contact}}</li>
+            <li>{{oh.class_name}}, {{oh.contact}}, {{oh.location_name}}, {{oh.latitude}}, {{oh.longitude}}, {{oh.start}}-{{oh.end}}</li>
         {% endfor %} 
     </div>
     <div id="map"></div>
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     var map;
     var markers = [];
@@ -39,7 +41,7 @@
         });
         getMarkers();
     }
-    
+
     function getMarkers() {
         $.ajax({
             url: "/markers",
@@ -61,7 +63,7 @@
                     var contentString = 'Class: ' + datum["class_name"] + '<br></br>' + 
                                         'Location: ' + datum["location_name"] + "<br></br>" + 
                                         'Contact: ' + datum["contact"] + "<br></br>" + 
-                                        'Start: ' + datum["start"] + "<br></br>"
+                                        'Start: ' + datum["start"] + "<br></br>" +
                                         'End: ' + datum["end"] + "<br></br>"
                     var infowindow = new google.maps.InfoWindow({
                                   content: contentString
