@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+<div>
+    <form method="post" action="/">
+        <input type="text" id="class" name="class" placeholder="e.g. CS 162"></input>
+        <input type="text" id="location_name" name="location_name" placeholder="e.g. PSB 123"></input>
+        <input type="text" id="contact" name="contact" placeholder="e.g. example@cornell.edu"></input>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    var pos;
+    window.onload = function() {
+        var geoSuccess = function(position) {
+            pos = position;
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    };
+
+    function submitOfficeHours() {
+        json = {
+            "latitude": pos.coords.latitude,
+            "longitude": pos.coords.longitude,
+            "class": document.getElementById("class").value,
+            "location_name": document.getElementById("location_name").value,
+            "contact": document.getElementById("contact").value
+        };
+        dat = JSON.stringify(json);
+        alert(dat);
+        /*
+        $.post({
+            "/submitevent",
+            dat,
+            function(data) {
+            }
+        });
+        */
+    }
+    document.getElementById("ourform").onsubmit = submitOfficeHours();
+</script>
