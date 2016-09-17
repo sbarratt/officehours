@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, url_for
-import config
 import json
+import time
+import datetime
 
 from app import app, db
 from .models import OfficeHour
@@ -17,20 +18,32 @@ def form():
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    print ("Submit")
-    print (request.form)
     class_name = request.form["class"]
     location_name = request.form["location_name"]
     contact = request.form["contact"]
     longitude = float(request.form["longitude"])
     latitude = float(request.form["latitude"])
-    print (class_name, location_name, contact, longitude, latitude)
+
+    start_time = time.strptime(request.form["start"], '%I:%M %p')
+    end_time = time.strptime(request.form["end"], '%I:%M %p')
+
+    print (start_time, end_time)
+
+    start = datetime.datetime.now()
+    start = start.replace(hour=start_time.tm_hour, minute=start_time.tm_min)
+
+    end = datetime.datetime.now()
+    end = end.replace(hour=end_time.tm_hour, minute=end_time.tm_min)
+
+    print (class_name, location_name, contact, longitude, latitude, start, end)
     oh = OfficeHour(
            class_name = class_name,
            location_name = location_name,
            contact = contact,
            longitude = longitude,
-           latitude = latitude
+           latitude = latitude,
+           start = start,
+           end = end
     )
     db.session.add(oh)
     db.session.commit()
@@ -38,7 +51,7 @@ def submit():
 
 @app.route("/markers", methods=["GET"])
 def markers():
-    officehours = db.session.query(OfficeHour).all()
+    officehours = db.session.query(OfficeHour).filter(OfficeHour.ended==False).all()
     ret = []
     for oh in officehours:
         ret.append(oh.asdict())

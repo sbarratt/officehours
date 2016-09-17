@@ -7,14 +7,24 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.min.css"></link>
+    <style>
+      form {
+        font-size: 20px;
+      }
+      input {
+        font-size: 20px;
+      }
+    </style>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <body>
 <div class="container">
     <div class="page-header">
         <h1> Office Hours </h1>
         <form action="/">
-            <button type="submit" class="btn btn-success">Go Back</button>
+            <button type="submit" class="btn btn-lg btn-primary">Go Back</button>
         </form>
     </div>
     <form method="post" action="/submit" id="form1">
@@ -32,21 +42,46 @@
       </div>
       <div class="form-group">
         <label for="start">Start:</label>
-        <input type="datetime" name="start" placeholder="e.g. 2PM" class="form-control" id="start">
+        <div class='input-group date' id='datetimepicker1'>
+            <input name="start" type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
       </div>
       <div class="form-group">
         <label for="end">End:</label>
-        <input type="datetime" name="end" placeholder="e.g. 4PM" class="form-control" id="end">
+        <div class='input-group date' id='datetimepicker2'>
+            <input name="end" type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
       </div>
-      <button type="submit" class="btn btn-success">Submit</button>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker2').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+      <button type="submit" class="btn btn-lg btn-success">Submit</button>
     </form>
 </div>
 </body>
 </html>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
     var pos;
     window.onload = function() {
         var geoSuccess = function(position) {
