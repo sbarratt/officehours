@@ -42,12 +42,21 @@
     var markers = [];
     var infowindows = [];
 
+    centerMap = function() {
+        var geoSuccess = function(position) {
+            var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.panTo(center);
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    };
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 42.4496, lng: -76.4821},
             zoom: 16
         });
         getMarkers();
+        centerMap();
     }
 
     function getMarkers() {
