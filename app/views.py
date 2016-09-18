@@ -27,15 +27,16 @@ def submit():
     contact = request.form["contact"]
     longitude = float(request.form["longitude"])
     latitude = float(request.form["latitude"])
+    offset = int(request.form["offset"])
 
     start_time = time.strptime(request.form["start"], '%I:%M %p')
     end_time = time.strptime(request.form["end"], '%I:%M %p')
 
-    start = datetime.datetime.now(pytz.timezone('US/Eastern'))
-    start = start.replace(hour=start_time.tm_hour, minute=start_time.tm_min)
+    start = datetime.datetime.utcnow()
+    start = start.replace(hour=start_time.tm_hour, minute=start_time.tm_min) + datetime.timedelta(minutes = offset)
 
-    end = datetime.datetime.now(pytz.timezone('US/Eastern'))
-    end = end.replace(hour=end_time.tm_hour, minute=end_time.tm_min)
+    end = datetime.datetime.utcnow()
+    end = end.replace(hour=end_time.tm_hour, minute=end_time.tm_min) + datetime.timedelta(minutes = offset)
 
     oh = OfficeHour(
            class_name = class_name,

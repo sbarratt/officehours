@@ -83,11 +83,15 @@
                             label: datum["class_name"],
                             title: datum["class_name"]
                     });
+                    var d = new Date();
+                    var n = d.getTimezoneOffset();
+                    var start = moment(datum["start"]).add(-n, 'minutes');
+                    var end = moment(datum["end"]).add(-n, 'minutes');
                     marker["content"] =  'Class: ' + datum["class_name"] + '<br />' +
                                         'Location: ' + datum["location_name"] + "<br />" +
                                         'Contact: ' + '<a href=mailto:' + datum["contact"] + '>' + datum["contact"] + '</a>'  + "<br />" +
-                                        'Start: ' + moment(datum["start"]).calendar() + "<br />" +
-                                        'End: ' + moment(datum["end"]).calendar() + "<br />";
+                                        'Start: ' + start.calendar() + "<br />" +
+                                        'End: ' + end.calendar() + "<br />";
                     markers.push(marker);
                 }
                 infowindow = new google.maps.InfoWindow({

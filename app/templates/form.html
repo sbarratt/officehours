@@ -86,14 +86,20 @@
     window.onload = function() {
         var geoSuccess = function(position) {
             pos = position;
+            var d = new Date();
+            var n = d.getTimezoneOffset();
             var input_lon = $("<input>")
                .attr("type", "hidden")
                .attr("name", "longitude").val(pos.coords.longitude);
             var input_lat = $("<input>")
                .attr("type", "hidden")
                .attr("name", "latitude").val(pos.coords.latitude);
+            var input_offset = $("<input>")
+               .attr("type", "hidden")
+               .attr("name", "offset").val(n);
             $('#form1').append($(input_lon));
             $('#form1').append($(input_lat));
+            $('#form1').append($(input_offset));
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
     };
