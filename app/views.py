@@ -8,7 +8,6 @@ from app import app, db
 from .models import OfficeHour
 
 @app.route("/", methods=["GET"])
-@app.route("/index", methods=["GET"])
 def index():
     officehours = db.session.query(OfficeHour).filter(OfficeHour.ended==False).all()
     return render_template("index.html", officehours=officehours)
@@ -28,15 +27,12 @@ def submit():
     start_time = time.strptime(request.form["start"], '%I:%M %p')
     end_time = time.strptime(request.form["end"], '%I:%M %p')
 
-    print (start_time, end_time)
-
     start = datetime.datetime.now(pytz.timezone('US/Eastern'))
     start = start.replace(hour=start_time.tm_hour, minute=start_time.tm_min)
 
     end = datetime.datetime.now(pytz.timezone('US/Eastern'))
     end = end.replace(hour=end_time.tm_hour, minute=end_time.tm_min)
 
-    print (class_name, location_name, contact, longitude, latitude, start, end)
     oh = OfficeHour(
            class_name = class_name,
            location_name = location_name,
@@ -48,6 +44,7 @@ def submit():
     )
     db.session.add(oh)
     db.session.commit()
+
     return redirect(url_for("index"))
 
 @app.route("/markers", methods=["GET"])
