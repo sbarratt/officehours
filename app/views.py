@@ -2,6 +2,7 @@ from flask import render_template, redirect, request, url_for
 import json
 import time
 import datetime
+import pytz
 
 from app import app, db
 from .models import OfficeHour
@@ -29,10 +30,10 @@ def submit():
 
     print (start_time, end_time)
 
-    start = datetime.datetime.now()
+    start = datetime.datetime.now(pytz.timezone('US/Eastern'))
     start = start.replace(hour=start_time.tm_hour, minute=start_time.tm_min)
 
-    end = datetime.datetime.now()
+    end = datetime.datetime.now(pytz.timezone('US/Eastern'))
     end = end.replace(hour=end_time.tm_hour, minute=end_time.tm_min)
 
     print (class_name, location_name, contact, longitude, latitude, start, end)
