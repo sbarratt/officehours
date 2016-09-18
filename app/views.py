@@ -12,6 +12,10 @@ def index():
     officehours = db.session.query(OfficeHour).filter(OfficeHour.ended==False).all()
     return render_template("index.html", officehours=officehours)
 
+@app.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html")
+
 @app.route("/form", methods=["GET"])
 def form():
     return render_template("form.html")
