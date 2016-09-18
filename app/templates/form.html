@@ -43,7 +43,7 @@
       <div class="form-group">
         <label for="start">Start:</label>
         <div class='input-group date' id='datetimepicker1'>
-            <input name="start" type='text' class="form-control" />
+            <input name="start" format="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)" type='text' class="form-control" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
@@ -52,7 +52,7 @@
       <div class="form-group">
         <label for="end">End:</label>
         <div class='input-group date' id='datetimepicker2'>
-            <input name="end" type='text' class="form-control" />
+            <input name="end" type='text' format="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)" class="form-control" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
